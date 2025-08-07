@@ -165,32 +165,117 @@
 //     }
 // }
 
-class Solution {
-    public String longestCommonPrefix(String[] strs) {
-        if (strs == null || strs.length == 0) {
-            return "";
-        }
-        String prefix = strs[0];
-        for (int i = 1; i < strs.length; i++) {
-            while (strs[i].indexOf(prefix) != 0) {
-                prefix = prefix.substring(0, prefix.length() - 1);
-                if (prefix.isEmpty()) {
-                    return "";
-                }
-            }
-        }
-        return prefix;
-    }
-}
+// class Solution {
+//     public String longestCommonPrefix(String[] strs) {
+//         if (strs == null || strs.length == 0) {
+//             return "";
+//         }
+//         String prefix = strs[0];
+//         for (int i = 1; i < strs.length; i++) {
+//             while (strs[i].indexOf(prefix) != 0) {
+//                 prefix = prefix.substring(0, prefix.length() - 1);
+//                 if (prefix.isEmpty()) {
+//                     return "";
+//                 }
+//             }
+//         }
+//         return prefix;
+//     }
+// }
+// import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+// import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) {
         Solution solution = new Solution();
-        System.out.println("1: " + solution.longestCommonPrefix(new String[] { "flower", "flow", "flight" }));
-        System.out.println("2: " + solution.longestCommonPrefix(new String[] { "dog", "racecar", "car" }));
-        System.out.println("3: " + solution.longestCommonPrefix(new String[] { "ball", "ballon", "bald" }));
-        System.out.println("4: " + solution.longestCommonPrefix(new String[] { "a", "b", "c" }));
-        System.out.println("5: " + solution.longestCommonPrefix(new String[] { "abc", "ab", "a" }));
-        System.out.println("6: " + solution.longestCommonPrefix(new String[] { "", "b", "c" }));
+        System.out.println(Arrays.toString(solution.removeDuplicates(new int[] { 1, 1, 2, 3, 4 }))); // Output: [1, 2,
+                                                                                                     // 3, 4]
+    }
+}
+
+// class Solution {
+// public boolean isValid(String s) {
+// Stack<Character> stack = new Stack<>();
+
+// for (char c : s.toCharArray()) {
+// if (c == '(' || c == '{' || c == '[') {
+// stack.push(c); // добавляем открывающую скобку в стек
+// } else if (c == ')' || c == '}' || c == ']') {
+// if (stack.isEmpty())
+// return false; // закрывающая скобка без пары
+// char open = stack.pop();
+// if (!isMatchingPair(open, c))
+// return false;
+// } else {
+// return false; // если встретили неожиданный символ
+// }
+// }
+
+// return stack.isEmpty(); // если стек пуст — все скобки закрыты корректно
+// }
+
+// private boolean isMatchingPair(char open, char close) {
+// return (open == '(' && close == ')')
+// || (open == '{' && close == '}')
+// || (open == '[' && close == ']');
+// }
+// }
+
+// class ListNode {
+// int val;
+// ListNode next;
+
+// ListNode() {
+// }
+
+// ListNode(int val) {
+// this.val = val;
+// }
+
+// ListNode(int val, ListNode next) {
+// this.val = val;
+// this.next = next;
+// }
+// }
+
+// class Solution {
+// public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+// ListNode dummy = new ListNode(0);
+// ListNode current = dummy;
+
+// while (list1 != null && list2 != null) {
+// if (list1.val < list2.val) {
+// current.next = list1;
+// list1 = list1.next;
+// } else {
+// current.next = list2;
+// list2 = list2.next;
+// }
+// current = current.next;
+// }
+
+// // Append any remaining elements from either list
+// current.next = (list1 != null) ? list1 : list2;
+
+// return dummy.next;
+// }
+// }
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        if (nums.length == 0)
+            return 0;
+
+        int uniqueCount = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] != nums[uniqueCount - 1]) {
+                nums[uniqueCount] = nums[i]; // записываем уникальный элемент внутрь nums
+                uniqueCount++;
+            }
+        }
+
+        return uniqueCount;
     }
 }
