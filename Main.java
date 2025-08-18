@@ -182,19 +182,6 @@
 //         return prefix;
 //     }
 // }
-// import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
-// import java.util.Stack;
-
-public class Main {
-    public static void main(String[] args) {
-        Solution solution = new Solution();
-        System.out.println(Arrays.toString(solution.removeDuplicates(new int[] { 1, 1, 2, 3, 4 }))); // Output: [1, 2,
-                                                                                                     // 3, 4]
-    }
-}
-
 // class Solution {
 // public boolean isValid(String s) {
 // Stack<Character> stack = new Stack<>();
@@ -263,19 +250,146 @@ public class Main {
 // }
 // }
 
-class Solution {
-    public int removeDuplicates(int[] nums) {
-        if (nums.length == 0)
-            return 0;
+// class Solution {
+// public int removeDuplicates(int[] nums) {
+// if (nums.length == 0)
+// return 0;
 
-        int uniqueCount = 1;
-        for (int i = 1; i < nums.length; i++) {
-            if (nums[i] != nums[uniqueCount - 1]) {
-                nums[uniqueCount] = nums[i]; // записываем уникальный элемент внутрь nums
-                uniqueCount++;
+// int uniqueCount = 1;
+// for (int i = 1; i < nums.length; i++) {
+// if (nums[i] != nums[uniqueCount - 1]) {
+// nums[uniqueCount] = nums[i]; // записываем уникальный элемент внутрь nums
+// uniqueCount++;
+// }
+// }
+
+// return uniqueCount;
+// }
+// }
+
+// class Solution {
+// public int removeElement(int[] nums, int val) {
+// int k = 0; // индекс для записи элементов, не равных val
+
+// for (int i = 0; i < nums.length; i++) {
+// if (nums[i] != val) {
+// nums[k] = nums[i]; // записываем элемент, не равный val
+// k++;
+// }
+// }
+
+// return k; // возвращаем количество элементов, не равных val
+// }
+// }
+
+// class Solution {
+// public int strStr(String haystack, String needle) {
+// if (needle == null || needle.length() == 0) {
+// return 0;
+// }
+// for (int i = 0; i <= haystack.length() - needle.length(); i++) {
+// if (haystack.substring(i, i + needle.length()).equals(needle)) {
+// return i;
+// }
+// }
+// return -1;
+// }
+// }
+
+// class Solution {
+// public int searchInsert(int[] nums, int target) {
+// int left = 0;
+// int right = nums.length - 1;
+
+// while (left <= right) {
+// int mid = left + (right - left) / 2;
+// if (nums[mid] == target) {
+// return mid;
+// } else if (nums[mid] < target) {
+// left = mid + 1;
+// } else {
+// right = mid - 1;
+// }
+// }
+// return left;
+// }
+// }
+
+// class Solution {
+// public int lengthOfLastWord(String s) {
+// s = s.trim(); // Удаляем пробелы в начале и конце строки
+// int lastSpaceIndex = s.lastIndexOf(' '); // Находим последний пробел
+// if (lastSpaceIndex == -1) {
+// return s.length(); // Если пробелов нет, возвращаем длину всей строки
+// }
+// return s.length() - lastSpaceIndex - 1; // Возвращаем длину последнего слова
+
+// }
+// }
+// class Solution {
+//     public int[] plusOne(int[] digits) {
+//         for (int i = digits.length - 1; i >= 0; i--) {
+//             if (digits[i] < 9) {
+//                 digits[i]++;
+//                 return digits; // Если не 9, просто увеличиваем и возвращаем
+//             }
+//             digits[i] = 0; // Если 9, делаем его 0 и продолжаем
+//         }
+//         // Если все цифры были 9, добавляем 1 в начало массива
+//         int[] newNumber = new int[digits.length + 1];
+//         newNumber[0] = 1;
+//         return newNumber;
+//     }
+// }
+
+// class Solution {
+//     public String addBinary(String a, String b) {
+//         StringBuilder result = new StringBuilder();
+//         int carry = 0;
+//         int i = a.length() - 1, j = b.length() - 1;
+
+//         while (i >= 0 || j >= 0 || carry > 0) {
+//             int sum = carry;
+//             if (i >= 0) {
+//                 sum += a.charAt(i--) - '0';
+//             }
+//             if (j >= 0) {
+//                 sum += b.charAt(j--) - '0';
+//             }
+
+//             result.append(sum % 2); // Добавляем текущий бит
+//             carry = sum / 2; // Вычисляем перенос
+//         }
+
+//         return result.reverse().toString(); // Переворачиваем результат
+//     }
+// }
+
+public class Main {
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(solution.mySqrt(4)); // Output: 2
+        System.out.println(solution.mySqrt(8)); // Output: 2
+    }
+}
+
+class Solution {
+    public int mySqrt(int x) {
+        if (x < 2) {
+            return x; // 0 и 1 возвращают сами себя
+        }
+        int left = 2, right = x / 2;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            long square = (long) mid * mid; // Используем long для избежания переполнения
+            if (square == x) {
+                return mid; // Найден точный корень
+            } else if (square < x) {
+                left = mid + 1; // Ищем в правой половине
+            } else {
+                right = mid - 1; // Ищем в левой половине
             }
         }
-
-        return uniqueCount;
+        return right; // Возвращаем наибольший целый корень
     }
 }
